@@ -2150,7 +2150,7 @@ class GenerationMixin:
                 unfinished_sequences = unfinished_sequences.mul((sum(next_tokens != i for i in eos_token_id)).long())
 
             # stop when each sentence is finished, or if we exceed the maximum length
-            if unfinished_sequences.max() == 0 or stopping_criteria(input_ids, scores):
+            if unfinished_sequences.float().max() == 0 or stopping_criteria(input_ids, scores):
                 if not synced_gpus:
                     break
                 else:
@@ -2416,7 +2416,7 @@ class GenerationMixin:
                 unfinished_sequences = unfinished_sequences.mul((sum(next_tokens != i for i in eos_token_id)).long())
 
             # stop when each sentence is finished, or if we exceed the maximum length
-            if unfinished_sequences.max() == 0 or stopping_criteria(input_ids, scores):
+            if unfinished_sequences.float().max() == 0 or stopping_criteria(input_ids, scores):
                 if not synced_gpus:
                     break
                 else:
